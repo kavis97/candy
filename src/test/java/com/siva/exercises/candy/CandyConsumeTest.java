@@ -9,8 +9,8 @@ import org.junit.Test;
 
 public class CandyConsumeTest {
     private CandyConsume subject = new CandyConsume();
-    Player a, b;
-    Player winner;
+    private Player a, b;
+    private Player winner;
 
     List<TestCase> tests;
 
@@ -24,7 +24,7 @@ public class CandyConsumeTest {
     public void setUp() throws Exception {
         tests = new ArrayList<>();
         tests.add(testCase("Siva", 3, "Kavi", 2, "Kavi"));
-        tests.add(testCase("Siva", 8, "Kavi", 11, "Kavi"));
+        tests.add(testCase("Vidya", 8, "Shammi", 11, "Shammi"));
         tests.add(testCase("Siva", 9, "Kavi", 1000, "Kavi"));
         tests.add(testCase("Siva", 4, "Kavi", 2, "Siva"));
         tests.add(testCase("Siva", 1, "Kavi", 1, "Siva"));
@@ -39,13 +39,13 @@ public class CandyConsumeTest {
         TestCase t = new TestCase();
         t.a = new Player(a, a_capacity);
         t.b = new Player(b, b_capacity);
-        t.winner = winner.equals(t.a.getName()) ? t.a : t.b;
+        t.winner = winner.equals(t.a.name) ? t.a : t.b;
         return t;
     }
 
     @Test
     public void executeTest() {
-        tests.stream().forEach(t -> {
+        tests.forEach(t -> {
             whenConsume(t.a, t.b);
             thenWinner(t.winner);
         });
